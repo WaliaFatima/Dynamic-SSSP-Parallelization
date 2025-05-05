@@ -78,16 +78,93 @@ Detailed project report and additional documentation are available in the /docs/
 Sample synthetic graphs are included in /datasets/.
 For large real-world datasets, please refer to:
 
-SNAP Datasets
 
-SuiteSparse Matrix Collection
+
+🚀 Implementations
+1. OpenMP
+Multi-threaded CPU execution.
+
+Uses dynamic scheduling and shared memory.
+
+Easy to debug and portable.
+
+2. OpenCL
+GPU-accelerated version.
+
+Uses kernels with atomic operations for fast distance updates.
+
+Highest throughput, suitable for large graphs.
+
+3. METIS + OpenMP
+Graph is pre-partitioned using METIS.
+
+Parallel updates across partitions.
+
+Improves load balancing and cache efficiency.
+
+📈 Performance Summary
+Method	Threads/GPU	Avg Time (ms)	Speedup	Memory Usage
+OpenMP	16 Threads	430	4.2x	Moderate
+OpenCL	GPU	270	6.8x	High
+METIS + OpenMP	16 Threads	320	5.1x	Low–Moderate
+
+📚 Research Mapping
+Paper Contribution	Our Implementation
+Affected vertex identification	Edge-based parallel search (OpenMP/OpenCL)
+Tree-structured SSSP update	BFS-style propagation and kernel relaxation
+Synchronization avoidance	Lock-free iterative updates
+GPU decomposition with VMFB	Separate kernels per edge update type
+Graph partitioning for load balancing	METIS + OpenMP integration
+
+📎 Links
+📘 Research Paper
+
+📊 Dataset - roadNet-CA
+
+📁 Project Report
+
+🔗 GitHub Repository
+
+✅ How to Run
+Clone the repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/WaliaFatima/Dynamic-SSSP-Parallelization.git
+cd Dynamic-SSSP-Parallelization
+Compile and run OpenMP version:
+
+bash
+Copy
+Edit
+cd openmp
+make
+./sssp_openmp
+Compile and run OpenCL version:
+
+bash
+Copy
+Edit
+cd opencl
+make
+./sssp_opencl
+Compile and run METIS + OpenMP:
+
+bash
+Copy
+Edit
+cd metis_omp
+make
+./sssp_metis
+Note: Ensure you have the required compilers, OpenCL drivers, and METIS library installed.
 
 👨‍👩‍👧‍👦 Team Members
-[Hassaan Qadir] — CPU and OpenMP Implementation
+[Hassaan Qadir] i210883
 
-[Mustafa Irfan] — CUDA and GPU Acceleration
+[Mustafa Irfan] i210626
 
-[Walia Fatima] — MPI + METIS Integration and Testing
+[Walia Fatima] i210838
 
 🎓 Instructor
 [Mr.Adil-ur-Rehman]
